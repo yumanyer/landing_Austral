@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+  --celeste: #75AADB;
+  --deep: #102A33;
+  --slate: #55717A;
+  --white: #ffffff;
+  --line: #dfe7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--white);
+  color: var(--deep);
+  font-family:
+    "Die Grotesk",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ------------------------------------------------ */
+/* HERO                                             */
+/* ------------------------------------------------ */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ------------------------------------------------ */
+/* NAV                                              */
+/* ------------------------------------------------ */
+
+.nav {
+  position: relative;
+  z-index: 10;
+
+  width: min(100% - 4rem, 1400px);
+  margin: 0 auto;
+
+  padding: 2rem 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.brand-mark {
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--celeste);
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.nav-links a {
+  color: var(--slate);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--deep);
+}
+
+.nav-links .nav-cta {
+  color: var(--deep);
+
+  padding: 0.7rem 1rem;
+
+  border: 1px solid var(--deep);
+}
+
+
+/* ------------------------------------------------ */
+/* CONTENT                                          */
+/* ------------------------------------------------ */
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(100% - 4rem, 1400px);
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+
+  align-items: center;
+
+  min-height: 0;
+  flex: 1;
+}
+
+
+/* ------------------------------------------------ */
+/* COPY                                             */
+/* ------------------------------------------------ */
+
+.hero-copy {
+  position: relative;
+  z-index: 5;
+
+  max-width: 720px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  margin-bottom: 2rem;
+
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+}
+
+.eyebrow span {
+  width: 7px;
+  height: 7px;
+
+  background: var(--celeste);
+
+  border-radius: 50%;
+}
+
+h1 {
+  margin: 0;
+
+  font-family: "Lora", Georgia, serif;
+
+  font-size: clamp(4rem, 7vw, 7.8rem);
+  line-height: 0.94;
+
+  font-weight: 500;
+
+  letter-spacing: -0.055em;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--celeste);
+}
+
+.hero-copy p {
+  max-width: 510px;
+
+  margin: 2rem 0 2.5rem;
+
+  font-size: 1.15rem;
+  line-height: 1.6;
+
+  color: var(--slate);
+}
+
+
+/* ------------------------------------------------ */
+/* BUTTONS                                          */
+/* ------------------------------------------------ */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 0.9rem 1.2rem;
+
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.primary {
+  background: var(--deep);
+  color: white;
+}
+
+.primary:hover {
+  background: var(--celeste);
+  color: var(--deep);
+  transform: translateY(-2px);
+}
+
+.primary span {
+  font-size: 1rem;
+}
+
+.secondary {
+  border-bottom: 1px solid var(--deep);
+}
+
+
+/* ------------------------------------------------ */
+/* PARTICLE SYSTEM                                  */
+/* ------------------------------------------------ */
+
+.system {
+  position: absolute;
+
+  width: min(65vw, 900px);
+  height: min(65vw, 900px);
+
+  right: -5vw;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  pointer-events: auto;
+}
+
+#particles {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.system-label {
+  position: absolute;
+
+  right: 5%;
+  top: 15%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+
+  color: var(--slate);
+
+  pointer-events: none;
+}
+
+.system-label span:first-child {
+  color: var(--deep);
+}
+
+.system-hint {
+  position: absolute;
+
+  right: 5%;
+  bottom: 15%;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+
+  color: var(--slate);
+
+  pointer-events: none;
+}
+
+
+/* ------------------------------------------------ */
+/* FOOTER                                           */
+/* ------------------------------------------------ */
+
+.hero-footer {
+  position: relative;
+  z-index: 10;
+
+  width: min(100% - 4rem, 1400px);
+  margin: 0 auto;
+
+  padding: 1.5rem 0;
+
+  border-top: 1px solid var(--line);
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+
+  color: var(--slate);
+}
+
+.scroll {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.scroll i {
+  display: block;
+
+  width: 45px;
+  height: 1px;
+
+  background: var(--slate);
+}
+
+
+/* ------------------------------------------------ */
+/* MOBILE                                           */
+/* ------------------------------------------------ */
+
+@media (max-width: 850px) {
+
+  .nav,
+  .hero-content,
+  .hero-footer {
+    width: min(100% - 2rem, 700px);
+  }
+
+  .nav-links a:not(.nav-cta) {
+    display: none;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 5rem 0;
+  }
+
+  .hero-copy {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 14vw, 6rem);
+  }
+
+  .system {
+    position: absolute;
+
+    width: 120vw;
+    height: 120vw;
+
+    right: -35vw;
+    top: 55%;
+
+    opacity: 0.5;
+
+    z-index: -1;
+  }
+
+  .hero-copy p {
+    max-width: 420px;
+  }
+
+  .hero-footer {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+    </style>
+</head>
+<body>
+
+  <main class="hero">
+
+    <header class="nav">
+      <a href="#" class="brand">
+        <span class="brand-mark">A</span>
+        <span>AUSTRAL</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#build">What we build</a>
+        <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+      </nav>
+    </header>
+
+
+    <section class="hero-content">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          <span></span>
+          FINANCIAL INFRASTRUCTURE
+        </div>
+
+        <h1>
+          Build markets
+          <br />
+          that don't
+          <br />
+          <em>exist yet.</em>
+        </h1>
+
+        <p>
+          Financial infrastructure for the next generation
+          of Latin American markets.
+        </p>
+
+        <div class="actions">
+          <a href="#waitlist" class="primary">
+            Join the waitlist
+            <span>↗</span>
+          </a>
+
+          <a href="#about" class="secondary">
+            Explore Austral
+          </a>
+        </div>
+
+      </div>
+
+
+      <div class="system">
+
+        <canvas id="particles"></canvas>
+
+        <div class="system-label">
+          <span>AUSTRAL SYSTEM</span>
+          <span>01 / 01</span>
+        </div>
+
+        <div class="system-hint">
+          Move through the system
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <footer class="hero-footer">
+      <span>ARGENTINA → LATIN AMERICA → THE WORLD</span>
+
+      <span class="scroll">
+        SCROLL
+        <i></i>
+      </span>
+    </footer>
+
+  </main>
+
+<script>const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+const system = document.querySelector(".system");
+
+let width;
+let height;
+
+const mouse = {
+  x: -1000,
+  y: -1000
+};
+
+const particles = [];
+
+const PARTICLE_COUNT = 900;
+const REPULSION_RADIUS = 110;
+const REPULSION_FORCE = 1.8;
+
+
+/* ------------------------------------------------ */
+/* RESIZE                                           */
+/* ------------------------------------------------ */
+
+function resize() {
+  const rect = system.getBoundingClientRect();
+
+  width = rect.width;
+  height = rect.height;
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resize);
+
+resize();
+
+
+/* ------------------------------------------------ */
+/* TARGET — FORMA DE A                              */
+/* ------------------------------------------------ */
+
+function createATargets() {
+
+  const targets = [];
+
+  const cx = width * 0.55;
+  const cy = height * 0.52;
+
+  const scale = Math.min(width, height) * 0.003;
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+
+    let x;
+    let y;
+
+    const section = Math.random();
+
+    /*
+      Dos diagonales de la A
+    */
+
+    if (section < 0.42) {
+
+      const t = Math.random();
+
+      x = cx - 190 * scale + t * 380 * scale;
+      y = cy + 190 * scale - t * 380 * scale;
+
+    } else if (section < 0.84) {
+
+      const t = Math.random();
+
+      x = cx + 190 * scale - t * 380 * scale;
+      y = cy + 190 * scale - t * 380 * scale;
+
+    } else {
+
+      /*
+        Barra central
+      */
+
+      x = cx - 110 * scale + Math.random() * 220 * scale;
+      y = cy + Math.random() * 35 * scale;
+
+    }
+
+    /*
+      Pequeña dispersión para que no sea
+      una A matemática perfecta.
+    */
+
+    x += (Math.random() - 0.5) * 30;
+    y += (Math.random() - 0.5) * 30;
+
+    targets.push({ x, y });
+  }
+
+  return targets;
+}
+
+
+/* ------------------------------------------------ */
+/* CREATE PARTICLES                                 */
+/* ------------------------------------------------ */
+
+function createParticles() {
+
+  const targets = createATargets();
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+
+    const target = targets[i];
+
+    particles.push({
+
+      x: Math.random() * width,
+      y: Math.random() * height,
+
+      vx: 0,
+      vy: 0,
+
+      tx: target.x,
+      ty: target.y,
+
+      size: Math.random() > 0.92 ? 2.5 : 1.6,
+
+      color:
+        Math.random() > 0.88
+          ? "#102A33"
+          : "#75AADB"
+    });
+  }
+}
+
+createParticles();
+
+
+/* ------------------------------------------------ */
+/* POINTER                                          */
+/* ------------------------------------------------ */
+
+system.addEventListener("pointermove", event => {
+
+  const rect = canvas.getBoundingClientRect();
+
+  mouse.x = event.clientX - rect.left;
+  mouse.y = event.clientY - rect.top;
+
+});
+
+system.addEventListener("pointerleave", () => {
+
+  mouse.x = -1000;
+  mouse.y = -1000;
+
+});
+
+
+/* ------------------------------------------------ */
+/* ANIMATION                                        */
+/* ------------------------------------------------ */
+
+function animate() {
+
+  requestAnimationFrame(animate);
+
+  ctx.clearRect(0, 0, width, height);
+
+  for (const p of particles) {
+
+    /*
+      ---------------------------------------------
+      1. Volver hacia la posición objetivo
+      ---------------------------------------------
+    */
+
+    const dxTarget = p.tx - p.x;
+    const dyTarget = p.ty - p.y;
+
+    p.vx += dxTarget * 0.012;
+    p.vy += dyTarget * 0.012;
+
+
+    /*
+      ---------------------------------------------
+      2. Repulsión del cursor
+      ---------------------------------------------
+    */
+
+    const dx = p.x - mouse.x;
+    const dy = p.y - mouse.y;
+
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < REPULSION_RADIUS) {
+
+      const force =
+        (1 - distance / REPULSION_RADIUS) *
+        REPULSION_FORCE;
+
+      const angle = Math.atan2(dy, dx);
+
+      p.vx += Math.cos(angle) * force;
+      p.vy += Math.sin(angle) * force;
+    }
+
+
+    /*
+      ---------------------------------------------
+      3. Fricción
+      ---------------------------------------------
+    */
+
+    p.vx *= 0.88;
+    p.vy *= 0.88;
+
+
+    /*
+      ---------------------------------------------
+      4. Movimiento
+      ---------------------------------------------
+    */
+
+    p.x += p.vx;
+    p.y += p.vy;
+
+
+    /*
+      ---------------------------------------------
+      5. Render
+      ---------------------------------------------
+    */
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.size,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle = p.color;
+
+    ctx.fill();
+  }
+}
+
+animate();</script>
+</body>
+</html>

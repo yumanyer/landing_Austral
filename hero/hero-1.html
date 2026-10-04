@@ -1,0 +1,115 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hero preview</title><link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet"><style>body{margin:0}</style></head><body>
+<section class="ah" aria-labelledby="ah-title">
+  <div class="ah__grid">
+    <div class="ah__copy">
+      <h1 id="ah-title">Build markets that don't exist yet.</h1>
+      <p class="ah__sub">Financial infrastructure for the next generation of Latin American markets.</p>
+      <div class="ah__cta">
+        <a class="ah__btn" href="#waitlist">Join the waitlist</a>
+        <a class="ah__btn ah__btn--ghost" href="#problem">Explore Austral</a>
+      </div>
+    </div>
+    <div class="ah__visual">
+      <!-- Fallback 2D (siempre se genera; se oculta si el 3D arranca) -->
+      <svg viewBox="0 0 400 400" role="img" aria-label="Scattered points resolving into an upward direction"></svg>
+      <canvas aria-hidden="true"></canvas>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+.ah{--ah-cel:var(--color-celeste,#75AADB);--ah-deep:var(--color-deep-austral,#102A33);--ah-slate:var(--color-slate,#55717A);
+  padding-block:clamp(3rem,8vw,6rem);background:#fff;color:var(--ah-deep);
+  font-family:var(--font-ui,"Die Grotesk","Helvetica Neue",Arial,sans-serif)}
+.ah__grid{width:min(100% - 2.5rem,1120px);margin-inline:auto;display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.ah h1{font-family:var(--font-serif,"Lora",Georgia,serif);font-weight:500;font-size:clamp(3rem,8.5vw,7rem);line-height:1.02;letter-spacing:-.03em;margin:0 0 1.5rem}
+.ah__sub{font-size:1.25rem;line-height:1.5;color:var(--ah-slate);max-width:34rem;margin:0 0 2.5rem}
+.ah__cta{display:flex;gap:1rem;flex-wrap:wrap}
+.ah__btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;padding:.5rem 1.5rem;border:1px solid var(--ah-deep);border-radius:2px;background:var(--ah-deep);color:#fff;font:600 .875rem/1 inherit;font-family:inherit;text-decoration:none;transition:background .18s,color .18s,border-color .18s}
+.ah__btn:hover{background:var(--ah-cel);border-color:var(--ah-cel);color:var(--ah-deep)}
+.ah__btn--ghost{background:none;color:var(--ah-deep)}
+.ah__btn--ghost:hover{background:#e9f0f6;border-color:#e9f0f6}
+.ah__btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(117,170,219,.6)}
+.ah__visual{position:relative;width:100%;max-width:600px;aspect-ratio:1;justify-self:end}
+.ah__visual svg,.ah__visual canvas{position:absolute;inset:0;width:100%;height:100%}
+.ah__visual canvas{display:none}
+.ah.is-gl .ah__visual svg{display:none}.ah.is-gl .ah__visual canvas{display:block}
+.ah__visual circle{fill:var(--ah-cel);animation:ah-settle 2s cubic-bezier(.2,.7,.2,1) both}
+.ah__visual circle.d{fill:var(--ah-deep)}
+@keyframes ah-settle{from{transform:translate(var(--dx),var(--dy));opacity:.35}to{transform:none;opacity:1}}
+@media (max-width:860px){.ah__grid{grid-template-columns:1fr}.ah__visual{justify-self:center;max-width:420px}}
+@media (prefers-reduced-motion:reduce){.ah__visual circle{animation:none}}
+</style>
+
+<script is:inline>
+(function(){
+  var root=document.querySelector('.ah');if(!root)return;
+  var svg=root.querySelector('svg'),cv=root.querySelector('canvas'),NS='http://www.w3.org/2000/svg';
+
+  /* 1. Retícula de puntos recortada por la silueta (flecha ascendente) */
+  var P=[[3,25],[14,3],[25,25],[19.5,25],[14,12.5],[8.5,25]].map(function(p){return[p[0]*14,p[1]*14]});
+  function inside(x,y){var c=false;for(var i=0,j=P.length-1;i<P.length;j=i++){if((P[i][1]>y)!==(P[j][1]>y)&&x<(P[j][0]-P[i][0])*(y-P[i][1])/(P[j][1]-P[i][1])+P[i][0])c=!c}return c}
+  var pts=[];
+  for(var y=30;y<370;y+=13)for(var x=30;x<370;x+=13)if(inside(x,y))pts.push({x:x,y:y,d:((x+y)/13|0)%7===0});
+
+  /* 2. Versión 2D (fallback) */
+  pts.forEach(function(p){
+    var c=document.createElementNS(NS,'circle');
+    c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r',2.6);
+    if(p.d)c.setAttribute('class','d');
+    c.style.cssText='--dx:'+((Math.random()-.5)*160|0)+'px;--dy:'+((Math.random()-.5)*160|0)+'px;animation-delay:'+((370-p.y)/370*1.4).toFixed(2)+'s';
+    svg.appendChild(c);
+  });
+
+  /* 3. Versión 3D: solo con WebGL, sin reduced-motion y en dispositivos razonables */
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  if(innerWidth<480&&(navigator.hardwareConcurrency||4)<4)return;
+  try{var t=document.createElement('canvas');if(!(t.getContext('webgl')||t.getContext('experimental-webgl')))return}catch(e){return}
+  var s=document.createElement('script');
+  s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.async=true;s.onload=init;document.head.appendChild(s);
+
+  function init(){
+    var T=THREE,r=new T.WebGLRenderer({canvas:cv,alpha:true,antialias:true}),scene=new T.Scene(),cam=new T.PerspectiveCamera(32,1,.1,100);
+    cam.position.z=15;
+    var LAYERS=7,SP=.38,tg=[],st=[],dl=[],col=[],k=0,C=[[.459,.667,.859],[.063,.165,.2]];
+    pts.forEach(function(p){
+      for(var z=-3;z<=3;z++){
+        tg.push((p.x-200)/40,(200-p.y)/40,z*SP);
+        st.push((Math.random()-.5)*14,(Math.random()-.5)*14,(Math.random()-.5)*10);
+        dl.push((370-p.y)/370*1.6+Math.random()*.4);
+        var c=C[p.d?1:0];col.push(c[0],c[1],c[2]);k++;
+      }
+    });
+    var pos=new Float32Array(st),geo=new T.BufferGeometry();
+    geo.setAttribute('position',new T.BufferAttribute(pos,3));
+    geo.setAttribute('color',new T.BufferAttribute(new Float32Array(col),3));
+    var c2=document.createElement('canvas');c2.width=c2.height=64;
+    var g2=c2.getContext('2d');g2.beginPath();g2.arc(32,32,30,0,7);g2.fill();
+    var mat=new T.PointsMaterial({size:.1,map:new T.CanvasTexture(c2),alphaTest:.5,vertexColors:true,transparent:true});
+    var grp=new T.Group();grp.add(new T.Points(geo,mat));scene.add(grp);
+
+    function size(){r.setPixelRatio(Math.min(devicePixelRatio,2));r.setSize(cv.clientWidth,cv.clientHeight,false)}
+    root.classList.add('is-gl');size();addEventListener('resize',size);
+
+    var vis=true,mx=0,my=0,t0=performance.now();
+    new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cv);
+    addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+
+    (function frame(now){
+      requestAnimationFrame(frame);if(!vis)return;
+      var t=(now-t0)/1000;
+      if(t<4){
+        for(var i=0;i<k;i++){
+          var p=Math.min(Math.max((t-dl[i])/1.8,0),1),e=1-Math.pow(1-p,3),j=i*3;
+          pos[j]=st[j]+(tg[j]-st[j])*e;pos[j+1]=st[j+1]+(tg[j+1]-st[j+1])*e;pos[j+2]=st[j+2]+(tg[j+2]-st[j+2])*e;
+        }
+        geo.attributes.position.needsUpdate=true;
+      }
+      grp.rotation.y+=((Math.sin(t*.45)*.55+mx*.7)-grp.rotation.y)*.06;
+      grp.rotation.x+=((my*.35)-grp.rotation.x)*.06;
+      r.render(scene,cam);
+    })(performance.now());
+  }
+})();
+</script>
+</body></html>

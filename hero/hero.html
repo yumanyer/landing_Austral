@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Austral — Build markets that don't exist yet</title>
+<meta name="description" content="Austral builds financial infrastructure for new markets around Latin American assets. Join the waitlist.">
+<link rel="canonical" href="https://austral.fi/">
+<meta property="og:title" content="Austral — Build markets that don't exist yet">
+<meta property="og:description" content="Financial infrastructure for the next generation of Latin American markets.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M3 25 14 3l11 22h-5.5L14 12.5 8.5 25z' fill='%2375AADB'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* TODO: cargar Die Grotesk (licencia web) con @font-face. Hasta entonces cae al fallback. */
+:root{
+  --color-celeste:#75AADB; --color-deep-austral:#102A33; --color-slate:#55717A; --color-white:#fff;
+  --color-line:#dfe8ee;
+  --font-serif:"Lora",Georgia,serif;
+  --font-ui:"Die Grotesk","Helvetica Neue",Arial,sans-serif;
+  --fs-1:clamp(3rem,8.5vw,7rem); --fs-2:clamp(2.2rem,5.2vw,4.25rem); --fs-3:1.25rem; --fs-body:1.0625rem; --fs-small:.875rem;
+  --space-1:.5rem; --space-2:1rem; --space-3:1.5rem; --space-4:2.5rem; --space-5:5rem; --space-6:10rem;
+  --radius:4px; --radius-pill:2px; --shadow-focus:0 0 0 3px rgba(117,170,219,.55);
+  --ease:cubic-bezier(.2,.7,.2,1); --t-fast:.18s; --t-slow:.9s;
+  --w-content:1120px; --w-text:38rem;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{font-family:var(--font-ui);font-size:var(--fs-body);line-height:1.6;color:var(--color-deep-austral);background:var(--color-white);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.1;letter-spacing:-.015em}
+h1{font-size:var(--fs-1)} h2{font-size:var(--fs-2)} h3{font-size:var(--fs-3);line-height:1.25}
+p{max-width:var(--w-text)}
+a{color:inherit}
+:focus-visible{outline:none;box-shadow:var(--shadow-focus);border-radius:var(--radius)}
+.wrap{width:min(100% - 2.5rem,var(--w-content));margin-inline:auto}
+section{padding-block:var(--space-6)}
+.muted{color:var(--color-slate)}
+.num{font-family:var(--font-ui);font-weight:600}
+
+/* Nav */
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--color-line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:4rem;gap:var(--space-3)}
+.logo{display:flex;align-items:center;gap:.6rem;text-decoration:none;font-weight:600;font-size:1.15rem;letter-spacing:.04em}
+.logo svg{width:26px;height:26px}
+.nav ul{display:flex;gap:var(--space-4);list-style:none;padding:0}
+.nav ul a{text-decoration:none;font-size:var(--fs-small);font-weight:500;color:var(--color-slate);transition:color var(--t-fast)}
+.nav ul a:hover{color:var(--color-deep-austral)}
+.nav-end{display:flex;align-items:center;gap:var(--space-2)}
+.lang{background:none;border:0;font:inherit;font-size:var(--fs-small);color:var(--color-slate);cursor:pointer;padding:.5rem}
+.lang:hover{color:var(--color-deep-austral)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.75rem;padding:.5rem 1.4rem;border-radius:var(--radius-pill);border:1px solid var(--color-deep-austral);background:var(--color-deep-austral);color:var(--color-white);font:600 var(--fs-small)/1 var(--font-ui);text-decoration:none;cursor:pointer;transition:background var(--t-fast),color var(--t-fast)}
+.btn:hover{background:var(--color-celeste);border-color:var(--color-celeste);color:var(--color-deep-austral)}
+.btn.ghost{background:none;color:var(--color-deep-austral)}
+.btn.ghost:hover{background:var(--color-line);border-color:var(--color-line)}
+
+/* Hero */
+.hero{padding-block:var(--space-5) var(--space-6)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-4);align-items:center}
+.hero h1{margin-bottom:var(--space-3)}
+.hero p.sub{font-size:1.25rem;color:var(--color-slate);margin-bottom:var(--space-4)}
+.cta-row{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.hero svg{width:100%;height:auto;max-height:600px}
+#mark circle{fill:var(--color-celeste)}#mark circle.d{fill:var(--color-deep-austral)}
+.hero h1{letter-spacing:-.03em;line-height:1.02}
+.hero .ln{stroke:var(--color-celeste);stroke-width:1.2;fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s var(--ease) .9s forwards}
+.hero .nd{fill:var(--color-deep-austral);animation:settle 2s var(--ease) both}
+.hero .nd.c{fill:var(--color-celeste)}
+.hero .core{fill:none;stroke:var(--color-deep-austral);stroke-width:1.5;opacity:0;animation:fade 1s ease 2.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes settle{from{transform:translate(var(--dx),var(--dy));opacity:.35}to{transform:none;opacity:1}}
+@keyframes fade{to{opacity:1}}
+
+/* Problem */
+.problem-head{max-width:46rem;margin-bottom:var(--space-4)}
+.problem-head p{margin-top:var(--space-3);color:var(--color-slate)}
+.frag{width:100%;height:auto;margin-block:var(--space-3) var(--space-5)}
+.frag circle{fill:var(--color-celeste)}
+.frag .big{fill:var(--color-deep-austral)}
+.frag text{font:500 12px var(--font-ui);fill:var(--color-slate)}
+.frag .gap{stroke:var(--color-slate);stroke-width:1;stroke-dasharray:3 6;opacity:.6}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);border-top:1px solid var(--color-line);padding-top:var(--space-3)}
+.three h3{margin-bottom:var(--space-1)}
+.three p{color:var(--color-slate);font-size:1rem}
+
+/* Solution */
+#solution .lead{margin-top:var(--space-3);color:var(--color-slate)}
+.flow{display:flex;align-items:stretch;margin-block:var(--space-5);border:1px solid var(--color-line);border-radius:var(--radius)}
+.flow>div{flex:1;padding:var(--space-3);border-right:1px solid var(--color-line);font-size:var(--fs-small);color:var(--color-slate)}
+.flow>div:last-child{border:0}
+.flow b{display:block;font-family:var(--font-serif);font-weight:500;font-size:1.15rem;color:var(--color-deep-austral);margin-bottom:.25rem}
+.flow .core-box{background:var(--color-celeste);color:var(--color-deep-austral)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)}
+.steps div{border-top:2px solid var(--color-celeste);padding-top:var(--space-2)}
+.steps h3{margin-bottom:.4rem}
+.steps p{font-size:1rem;color:var(--color-slate)}
+
+/* Blockchain (dark block) */
+.dark{background:var(--color-deep-austral);color:var(--color-white)}
+.dark p{color:#b9cbd1}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-block:var(--space-4)}
+.facts span{display:block;font-family:var(--font-ui);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.6rem);color:var(--color-celeste);border-top:1px solid #2c4650;padding-top:var(--space-2)}
+.dark strong{font-family:var(--font-serif);font-weight:500;font-size:var(--fs-3)}
+
+/* Expansion */
+.exp{display:grid;grid-template-columns:repeat(3,1fr);margin-top:var(--space-4)}
+.exp>div{padding:var(--space-3) var(--space-3) var(--space-3) 0;border-top:1px solid var(--color-deep-austral);position:relative}
+.exp>div:nth-child(2){padding-left:var(--space-3)}
+.exp>div:nth-child(3){padding-left:var(--space-3)}
+.exp h3{font-size:var(--fs-2);margin-bottom:.5rem}
+.exp .tag{display:inline-block;margin-top:var(--space-2);font-size:var(--fs-small);font-weight:600;padding:.15rem .7rem;border:1px solid var(--color-celeste);border-radius:var(--radius-pill);color:var(--color-deep-austral)}
+.exp>div:nth-child(1) .tag{background:var(--color-celeste)}
+.status{margin-top:var(--space-4);color:var(--color-slate);font-size:1rem}
+
+/* Waitlist */
+.waitlist{background:var(--color-celeste)}
+.waitlist .muted{color:var(--color-deep-austral)}.waitlist .btn:hover{background:var(--color-white);border-color:var(--color-white)}.waitlist input,.waitlist select{border-color:var(--color-deep-austral)}
+.wl{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:start}
+form{display:grid;gap:var(--space-3)}
+label{display:grid;gap:.4rem;font-size:var(--fs-small);font-weight:600}
+input,select{font:400 1rem var(--font-ui);color:var(--color-deep-austral);min-height:3rem;padding:.6rem .9rem;border:1px solid #b9cbd1;border-radius:var(--radius);background:var(--color-white)}
+input:focus,select:focus{border-color:var(--color-celeste)}
+.ok{display:none}
+.ok h3{font-size:var(--fs-2);margin-bottom:var(--space-2)}
+.sent form{display:none} .sent .ok{display:block}
+.err{color:#9b2c2c;font-size:var(--fs-small)}
+
+/* FAQ */
+details{border-bottom:1px solid var(--color-line);padding-block:var(--space-2)}
+summary{cursor:pointer;font-family:var(--font-serif);font-size:var(--fs-3);padding-block:.4rem;list-style:none;display:flex;justify-content:space-between;gap:var(--space-2)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--color-celeste);font-family:var(--font-ui);font-weight:600;transition:transform var(--t-fast)}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--color-slate);margin-top:.4rem}
+#faq .wrap{max-width:52rem}
+#faq h2{margin-bottom:var(--space-4)}
+
+footer{background:var(--color-deep-austral);color:var(--color-white);padding-block:var(--space-5)}
+footer .top{display:flex;justify-content:space-between;gap:var(--space-4);flex-wrap:wrap}
+footer .logo{color:var(--color-white);margin-bottom:var(--space-2)}
+footer p{color:#b9cbd1}
+footer ul{list-style:none;padding:0;display:flex;gap:var(--space-3);flex-wrap:wrap;align-self:flex-end}
+footer li a{color:#b9cbd1;text-decoration:none;font-size:var(--fs-small)}
+footer li a:hover{color:var(--color-celeste)}
+
+@media (max-width:860px){
+  .nav ul{display:none}
+  .hero-grid,.wl{grid-template-columns:1fr}
+  .three,.steps,.facts{grid-template-columns:1fr 1fr}
+  .three{grid-template-columns:1fr}
+  .flow{flex-direction:column}.flow>div{border-right:0;border-bottom:1px solid var(--color-line)}
+  .exp{grid-template-columns:1fr}.exp>div,.exp>div:nth-child(n){padding-left:0}
+  section{padding-block:var(--space-5)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero .ln{animation:none;stroke-dashoffset:0}
+  .hero .nd{animation:none}
+  .hero .core{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Austral">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 25 14 3l11 22h-5.5L14 12.5 8.5 25z" fill="#75AADB"/></svg>AUSTRAL
+    </a>
+    <ul>
+      <li><a href="#solution" data-en="Product" data-es="Producto">Product</a></li>
+      <li><a href="#vision" data-en="Vision" data-es="Visión">Vision</a></li>
+      <li><a href="#faq" data-en="FAQ" data-es="Preguntas">FAQ</a></li>
+    </ul>
+    <div class="nav-end">
+      <button class="lang" id="lang" type="button" aria-label="Change language">ES</button>
+      <a class="btn" href="#waitlist" data-en="Join the waitlist" data-es="Sumate a la waitlist">Join the waitlist</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 data-en="Build markets that don't exist yet." data-es="Construimos mercados que todavía no existen.">Build markets that don't exist yet.</h1>
+      <p class="sub" data-en="Financial infrastructure for the next generation of Latin American markets." data-es="Infraestructura financiera para la próxima generación de mercados latinoamericanos.">Financial infrastructure for the next generation of Latin American markets.</p>
+      <div class="cta-row">
+        <a class="btn" href="#waitlist" data-en="Join the waitlist" data-es="Sumate a la waitlist">Join the waitlist</a>
+        <a class="btn ghost" href="#problem" data-en="Explore Austral" data-es="Conocé Austral">Explore Austral</a>
+      </div>
+    </div>
+    <svg id="mark" viewBox="0 0 400 400" role="img" aria-label="Scattered points resolving into an upward direction"></svg>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="problem-head">
+      <h2 data-en="Some companies have potential. They just don't have a market." data-es="Algunas empresas tienen potencial. Les falta un mercado.">Some companies have potential. They just don't have a market.</h2>
+      <p data-en="Latin American companies and assets can have significant potential while remaining disconnected from global markets and new forms of capital access." data-es="Las empresas y los activos latinoamericanos pueden tener mucho potencial y, aun así, seguir desconectados de los mercados globales y de nuevas formas de acceso a capital.">Latin American companies and assets can have significant potential while remaining disconnected from global markets and new forms of capital access.</p>
+    </div>
+    <svg class="frag" viewBox="0 0 900 220" role="img" aria-label="Companies and participants separated by distance">
+      <circle class="big" cx="110" cy="60" r="9"/><text x="128" y="64" data-en="Company A" data-es="Empresa A">Company A</text>
+      <circle cx="420" cy="150" r="5"/><circle cx="260" cy="190" r="5"/><circle cx="560" cy="40" r="5"/>
+      <circle class="big" cx="650" cy="130" r="9"/><text x="668" y="134" data-en="Company B" data-es="Empresa B">Company B</text>
+      <circle cx="820" cy="60" r="7"/><text x="760" y="38" data-en="Participant" data-es="Participante">Participant</text>
+      <path class="gap" d="M125 62 L400 148"/><path class="gap" d="M560 130 L520 90"/>
+    </svg>
+    <div class="three">
+      <div><h3 data-en="Limited access" data-es="Acceso limitado">Limited access</h3><p data-en="Access to markets and capital can depend on a company's size, location, financial structure and connections." data-es="El acceso a mercados y capital puede depender del tamaño, la ubicación, la estructura financiera y las conexiones de una empresa.">Access to markets and capital can depend on a company's size, location, financial structure and connections.</p></div>
+      <div><h3 data-en="Fragmented markets" data-es="Mercados fragmentados">Fragmented markets</h3><p data-en="Latin American markets remain fragmented, and many opportunities stay disconnected from global participants." data-es="Los mercados latinoamericanos siguen fragmentados y muchas oportunidades quedan desconectadas de participantes globales.">Latin American markets remain fragmented, and many opportunities stay disconnected from global participants.</p></div>
+      <div><h3 data-en="Closed infrastructure" data-es="Infraestructura cerrada">Closed infrastructure</h3><p data-en="Many financial markets rely on infrastructure and schedules that limit when and how they can operate." data-es="Muchos mercados financieros dependen de infraestructura y horarios que limitan cuándo y cómo pueden operar.">Many financial markets rely on infrastructure and schedules that limit when and how they can operate.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="solution" style="background:#f5f9fc">
+  <div class="wrap">
+    <h2 data-en="We build the market." data-es="Construimos el mercado.">We build the market.</h2>
+    <p class="lead" data-en="Austral builds infrastructure that enables new markets around Latin American assets and connects them with global participants." data-es="Austral construye la infraestructura que permite nuevos mercados alrededor de activos latinoamericanos y los conecta con participantes globales.">Austral builds infrastructure that enables new markets around Latin American assets and connects them with global participants.</p>
+    <div class="flow" role="img" aria-label="Latin American assets, through Austral, become market infrastructure for participants and capital">
+      <div><b data-en="Latin American assets" data-es="Activos latinoamericanos">Latin American assets</b></div>
+      <div class="core-box"><b>Austral</b></div>
+      <div><b data-en="Market infrastructure" data-es="Infraestructura de mercado">Market infrastructure</b></div>
+      <div><b data-en="Participants and capital" data-es="Participantes y capital">Participants and capital</b></div>
+    </div>
+    <div class="steps">
+      <div><h3 data-en="Create" data-es="Crear">Create</h3><p data-en="Build infrastructure for new markets." data-es="Construir infraestructura para nuevos mercados.">Build infrastructure for new markets.</p></div>
+      <div><h3 data-en="Connect" data-es="Conectar">Connect</h3><p data-en="Connect Latin American assets with new participants." data-es="Conectar activos latinoamericanos con nuevos participantes.">Connect Latin American assets with new participants.</p></div>
+      <div><h3 data-en="Operate" data-es="Operar">Operate</h3><p data-en="Enable markets designed for continuous, programmable infrastructure." data-es="Habilitar mercados pensados para una infraestructura continua y programable.">Enable markets designed for continuous, programmable infrastructure.</p></div>
+      <div><h3 data-en="Scale" data-es="Escalar">Scale</h3><p data-en="Expand from individual markets toward a broader Latin American financial network." data-es="Pasar de mercados individuales a una red financiera latinoamericana más amplia.">Expand from individual markets toward a broader Latin American financial network.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark">
+  <div class="wrap">
+    <h2 data-en="Markets that don't sleep." data-es="Mercados que no duermen.">Markets that don't sleep.</h2>
+    <div class="facts" aria-label="24/7, programmable, transparent, global">
+      <span>24/7</span><span data-en="Programmable" data-es="Programable">Programmable</span><span data-en="Transparent" data-es="Transparente">Transparent</span><span data-en="Global" data-es="Global">Global</span>
+    </div>
+    <p data-en="Blockchain provides the infrastructure layer that lets Austral build markets designed for continuous operation, programmable settlement and transparent on-chain activity." data-es="Blockchain es la capa de infraestructura que le permite a Austral construir mercados pensados para operar de forma continua, con liquidación programable y actividad on-chain transparente.">Blockchain provides the infrastructure layer that lets Austral build markets designed for continuous operation, programmable settlement and transparent on-chain activity.</p>
+    <p style="margin-top:var(--space-2)"><strong data-en="Blockchain is infrastructure, not the product." data-es="Blockchain es infraestructura, no el producto.">Blockchain is infrastructure, not the product.</strong></p>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="wrap">
+    <div class="exp">
+      <div><h3 data-en="Argentina is where we start." data-es="Argentina es donde empezamos.">Argentina is where we start.</h3><p class="muted" data-en="We know the market, its companies, its constraints and its opportunities." data-es="Conocemos el mercado, sus empresas, sus limitaciones y sus oportunidades.">We know the market, its companies, its constraints and its opportunities.</p><span class="tag" data-en="Building" data-es="En construcción">Building</span></div>
+      <div><h3 data-en="Latin America is next." data-es="Latinoamérica es lo próximo.">Latin America is next.</h3><p class="muted" data-en="Our expansion." data-es="Nuestra expansión.">Our expansion.</p><span class="tag" data-en="Vision" data-es="Visión">Vision</span></div>
+      <div><h3 data-en="The world is the horizon." data-es="El mundo es el horizonte.">The world is the horizon.</h3><p class="muted" data-en="A direction, not a deadline." data-es="Una dirección, no una fecha.">A direction, not a deadline.</p><span class="tag" data-en="Vision" data-es="Visión">Vision</span></div>
+    </div>
+    <p class="status" data-en="Existing today: technical infrastructure and prototypes under development. Public product capabilities will evolve as the project progresses." data-es="Hoy existe: infraestructura técnica y prototipos en desarrollo. Las capacidades públicas del producto irán evolucionando a medida que avance el proyecto.">Existing today: technical infrastructure and prototypes under development. Public product capabilities will evolve as the project progresses.</p>
+  </div>
+</section>
+
+<section id="waitlist" class="waitlist">
+  <div class="wrap wl" id="wl">
+    <div>
+      <h2 data-en="Be there when the market opens." data-es="Estate cuando el mercado abra.">Be there when the market opens.</h2>
+      <p style="margin-top:var(--space-3)" class="muted" data-en="Join the early access list and be among the first to hear about new markets and products built by Austral." data-es="Sumate a la lista de acceso anticipado y enterate primero de los nuevos mercados y productos que construye Austral.">Join the early access list and be among the first to hear about new markets and products built by Austral.</p>
+    </div>
+    <div>
+      <!-- Reemplazar YOUR_FORM_ID por el ID real de Formspree -->
+      <form id="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label><span data-en="Email" data-es="Email">Email</span><input type="email" name="email" required autocomplete="email"></label>
+        <label><span data-en="Country" data-es="País">Country</span><input type="text" name="country" required autocomplete="country-name"></label>
+        <label><span data-en="I am a..." data-es="Soy...">I am a...</span>
+          <select name="role" required>
+            <option value="" data-en="Select one" data-es="Elegí una opción">Select one</option>
+            <option value="trader" data-en="Trader" data-es="Trader">Trader</option>
+            <option value="investor" data-en="Investor" data-es="Inversor">Investor</option>
+            <option value="company" data-en="Company" data-es="Empresa">Company</option>
+            <option value="developer" data-en="Developer" data-es="Desarrollador">Developer</option>
+            <option value="other" data-en="Other" data-es="Otro">Other</option>
+          </select>
+        </label>
+        <button class="btn" type="submit" data-en="Join the waitlist" data-es="Sumate a la waitlist">Join the waitlist</button>
+        <p class="err" id="err" role="alert" hidden data-en="We couldn't send your details. Check your connection and try again." data-es="No pudimos enviar tus datos. Revisá tu conexión y probá de nuevo.">We couldn't send your details. Check your connection and try again.</p>
+      </form>
+      <div class="ok" role="status">
+        <h3 data-en="You're in." data-es="Ya estás adentro.">You're in.</h3>
+        <p class="muted" data-en="We'll keep you updated as Austral gets closer to opening its first markets." data-es="Te vamos a mantener al tanto a medida que Austral se acerque a abrir sus primeros mercados.">We'll keep you updated as Austral gets closer to opening its first markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2 data-en="Questions" data-es="Preguntas frecuentes">Questions</h2>
+    <details><summary data-en="What is Austral?" data-es="¿Qué es Austral?">What is Austral?</summary><p data-en="Financial infrastructure for new markets around Latin American assets." data-es="Infraestructura financiera para nuevos mercados alrededor de activos latinoamericanos.">Financial infrastructure for new markets around Latin American assets.</p></details>
+    <details><summary data-en="What are you building?" data-es="¿Qué están construyendo?">What are you building?</summary><p data-en="Infrastructure designed to enable new markets and connect Latin American assets with new participants." data-es="Infraestructura pensada para habilitar nuevos mercados y conectar activos latinoamericanos con nuevos participantes.">Infrastructure designed to enable new markets and connect Latin American assets with new participants.</p></details>
+    <details><summary data-en="Why Argentina?" data-es="¿Por qué Argentina?">Why Argentina?</summary><p data-en="It's the market we know best and where we are starting to build." data-es="Es el mercado que mejor conocemos y donde empezamos a construir.">It's the market we know best and where we are starting to build.</p></details>
+    <details><summary data-en="Is Austral an exchange?" data-es="¿Austral es un exchange?">Is Austral an exchange?</summary><p data-en="Austral is building market infrastructure. Specific products and interfaces may evolve over time." data-es="Austral construye infraestructura de mercado. Los productos e interfaces específicos pueden evolucionar con el tiempo.">Austral is building market infrastructure. Specific products and interfaces may evolve over time.</p></details>
+    <details><summary data-en="Why blockchain?" data-es="¿Por qué blockchain?">Why blockchain?</summary><p data-en="It provides infrastructure for programmable settlement, continuous operation and transparent on-chain activity." data-es="Aporta infraestructura para liquidación programable, operación continua y actividad on-chain transparente.">It provides infrastructure for programmable settlement, continuous operation and transparent on-chain activity.</p></details>
+    <details><summary data-en="What exists today?" data-es="¿Qué existe hoy?">What exists today?</summary><p data-en="Austral already has technical infrastructure and prototypes under development. Public product capabilities will evolve as the project progresses." data-es="Austral ya tiene infraestructura técnica y prototipos en desarrollo. Las capacidades públicas del producto irán evolucionando a medida que avance el proyecto.">Austral already has technical infrastructure and prototypes under development. Public product capabilities will evolve as the project progresses.</p></details>
+    <details><summary data-en="Can I participate?" data-es="¿Puedo participar?">Can I participate?</summary><p data-en="Join the waitlist to follow the development of Austral and future markets." data-es="Sumate a la waitlist para seguir el desarrollo de Austral y de los próximos mercados.">Join the waitlist to follow the development of Austral and future markets.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap top">
+    <div>
+      <div class="logo"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 25 14 3l11 22h-5.5L14 12.5 8.5 25z" fill="#75AADB"/></svg>AUSTRAL</div>
+      <p data-en="Building markets that don't exist yet." data-es="Construyendo mercados que todavía no existen.">Building markets that don't exist yet.</p>
+      <p style="margin-top:.5rem" data-en="Argentina → Latin America → The World" data-es="Argentina → Latinoamérica → El mundo">Argentina → Latin America → The World</p>
+    </div>
+    <!-- Completar href reales; Privacy solo cuando exista el documento -->
+    <ul>
+      <li><a href="#">X</a></li><li><a href="#">LinkedIn</a></li><li><a href="#">GitHub</a></li>
+      <li><a href="#" data-en="Contact" data-es="Contacto">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('[data-es]'),btn=document.getElementById('lang');
+  function set(l){
+    document.documentElement.lang=l;
+    els.forEach(function(e){e.textContent=e.dataset[l]});
+    btn.textContent=l==='en'?'ES':'EN';
+    try{localStorage.setItem('lang',l)}catch(_){}
+  }
+  btn.addEventListener('click',function(){set(document.documentElement.lang==='en'?'es':'en')});
+  var s;try{s=localStorage.getItem('lang')}catch(_){}
+  if(!s&&(navigator.language||'').slice(0,2)==='es')s='es';
+  if(s==='es')set('es');
+
+  var f=document.getElementById('form'),err=document.getElementById('err');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();err.hidden=true;
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
+      .then(function(r){if(!r.ok)throw 0;document.getElementById('wl').classList.add('sent')})
+      .catch(function(){err.hidden=false});
+  });
+  var m=document.getElementById('mark'),P=[[3,25],[14,3],[25,25],[19.5,25],[14,12.5],[8.5,25]].map(function(p){return[p[0]*14,p[1]*14]});
+  function inside(x,y){var c=false;for(var i=0,j=P.length-1;i<P.length;j=i++){if((P[i][1]>y)!==(P[j][1]>y)&&x<(P[j][0]-P[i][0])*(y-P[i][1])/(P[j][1]-P[i][1])+P[i][0])c=!c}return c}
+  for(var y=30;y<370;y+=13)for(var x=30;x<370;x+=13){if(inside(x,y)){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',2.6);c.setAttribute('class','nd'+(((x+y)/13|0)%7===0?' d':''));c.style.cssText='--dx:'+((Math.random()-.5)*160|0)+'px;--dy:'+((Math.random()-.5)*160|0)+'px;animation-delay:'+((370-y)/370*1.4).toFixed(2)+'s';m.appendChild(c)}}
+})();
+</script>
+</body>
+</html>

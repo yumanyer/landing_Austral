@@ -1,0 +1,411 @@
+{
+  "brand": {
+    "name": "AUSTRAL",
+    "document": "Sistema de Identidad Visual",
+    "brand_keywords": [
+      "Crecimiento",
+      "Dirección",
+      "Futuro"
+    ]
+  },
+
+  "logo_system": {
+    "isotipo": {
+      "name": "Símbolo principal",
+      "description": "Símbolo gráfico basado en una A estilizada integrada con una flecha ascendente.",
+      "primary_color": "Celeste Bandera"
+    },
+
+    "logotipo": {
+      "name": "Marca tipográfica",
+      "text": "AUSTRAL",
+      "font": "Die Grotesk"
+    },
+
+    "marca_completa": {
+      "name": "Isotipo + logotipo",
+      "composition": "Isotipo a la izquierda y logotipo AUSTRAL a la derecha."
+    }
+  },
+  "typography": {
+              "system": "Dual Typography System",
+
+          "editorial": {
+            "family": "Lora",
+            "category": "Serif",
+            "role": "Editorial / Letras",
+            "alphabet": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz Ññ",
+            "weights": {
+              "regular": {
+                "weight": "Regular",
+                "usage": [
+                  "Cuerpo de texto",
+                  "Textos institucionales",
+                  "Manifiestos",
+                  "Claims",
+                  "Comunicación de marca"
+                ]
+              },
+              "medium": {
+                "weight": "Medium",
+                "usage": [
+                  "Subtítulos editoriales",
+                  "Mensajes destacados"
+                ]
+              },
+              "semibold": {
+                "weight": "Semibold",
+                "usage": [
+                  "Titulares principales",
+                  "Énfasis editorial",
+                  "Mensajes de alto impacto"
+                ]
+              }
+            }
+          },
+      
+          "functional": {
+            "family": "Die Grotesk",
+            "category": "Sans Serif",
+            "role": "Tech / Datos / UI",
+            "alphabet": "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz",
+            "numbers": "0123456789",
+            "weights": {
+              "regular": {
+                "weight": "Regular",
+                "usage": [
+                  "UI",
+                  "Navegación",
+                  "Botones",
+                  "Formularios",
+                  "Elementos digitales"
+                ]
+              },
+              "medium": {
+                "weight": "Medium",
+                "usage": [
+                  "Datos",
+                  "Labels",
+                  "Métricas",
+                  "Elementos de interfaz"
+                ]
+              },
+              "semibold": {
+                "weight": "Semibold",
+                "usage": [
+                  "Números destacados",
+                  "Datos financieros",
+                  "CTAs",
+                  "Títulos de interfaz"
+                ]
+              }
+            }
+          },
+      
+          "brand": {
+            "family": "Die Grotesk",
+            "weight": "Semibold",
+            "usage": [
+              "Logotipo AUSTRAL",
+              "Marca tipográfica"
+            ]
+          },
+      
+          "numbers": {
+            "family": "Die Grotesk",
+            "preferred_weights": [
+              "Medium",
+              "Semibold"
+            ],
+            "usage": [
+              "Precios",
+              "Balances",
+              "Porcentajes",
+              "Métricas",
+              "Datos financieros",
+              "Gráficos",
+              "Fechas",
+              "Estadísticas",
+              "Valores numéricos"
+            ]
+          },
+      
+          "hierarchy": {
+            "h1": {
+              "family": "Lora",
+              "weight": "Semibold",
+              "role": "Titular principal"
+            },
+            "h2": {
+              "family": "Lora",
+              "weight": "Semibold",
+              "role": "Titular secundario"
+            },
+            "body": {
+              "family": "Lora",
+              "weight": "Regular",
+              "role": "Texto descriptivo"
+            },
+            "editorial_emphasis": {
+              "family": "Lora",
+              "weight": "Medium",
+              "role": "Énfasis editorial"
+            },
+            "data": {
+              "family": "Die Grotesk",
+              "weight": "Semibold",
+              "role": "Datos / CTA"
+            },
+            "ui": {
+              "family": "Die Grotesk",
+              "weights": [
+                "Regular",
+                "Medium"
+              ],
+              "role": "UI / Producto digital"
+            }
+          },
+      
+          "rule": {
+            "letters": "Lora",
+            "numbers": "Die Grotesk",
+            "ui": "Die Grotesk",
+            "logo": "Die Grotesk Semibold",
+            "principle": "Lora aporta carácter editorial y humano; Die Grotesk aporta precisión, tecnología y claridad funcional."
+          }
+        },
+    "weights": {
+      "bold": {
+        "weight": "Bold",
+        "usage": [
+          "Títulos",
+          "Textos destacados"
+        ]
+      },
+      "medium": {
+        "weight": "Medium",
+        "usage": [
+          "Subtítulos",
+          "Elementos"
+        ]
+      },
+      "regular": {
+        "weight": "Regular",
+        "usage": [
+          "Cuerpo de texto"
+        ]
+      },
+      "light": {
+        "weight": "Light",
+        "usage": [
+          "Textos secundarios",
+          "Textos legales"
+        ]
+      }
+    },
+  "color_system": {
+    "colors": {
+      "celeste_bandera": {
+        "name": "Celeste Bandera",
+        "hex": "#75AADB",
+        "rgb": {
+          "r": 117,
+          "g": 170,
+          "b": 219
+        },
+        "cmyk": {
+          "c": 47,
+          "m": 22,
+          "y": 0,
+          "k": 14
+        },
+        "usage": "Color principal del logo"
+      },
+
+      "deep_austral": {
+        "name": "Deep Austral",
+        "hex": "#102A33",
+        "rgb": {
+          "r": 16,
+          "g": 42,
+          "b": 51
+        },
+        "cmyk": {
+          "c": 69,
+          "m": 18,
+          "y": 0,
+          "k": 80
+        },
+        "usage": "Fondos y textos principales"
+      },
+
+      "slate": {
+        "name": "Slate",
+        "hex": "#55717A",
+        "rgb": {
+          "r": 85,
+          "g": 113,
+          "b": 122
+        },
+        "cmyk": {
+          "c": 30,
+          "m": 7,
+          "y": 0,
+          "k": 52
+        },
+        "usage": "Textos secundarios y elementos de apoyo"
+      },
+
+      "white": {
+        "name": "Blanco",
+        "hex": "#FFFFFF",
+        "rgb": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "cmyk": {
+          "c": 0,
+          "m": 0,
+          "y": 0,
+          "k": 0
+        },
+        "usage": "Fondos y espacios negativos"
+      }
+    }
+  },
+
+  "logo_variations": {
+    "monochromatic": {
+      "black_on_white": {
+        "description": "Logo en color negro sobre fondo blanco."
+      },
+      "white_on_black": {
+        "description": "Logo en color blanco sobre fondo negro."
+      },
+      "grayscale": {
+        "description": "Logo en escala de grises.",
+        "opacity": "70%"
+      },
+      "white_on_gray": {
+        "description": "Logo blanco sobre fondo gris."
+      }
+    },
+
+    "primary_color": {
+      "description": "Versión principal del logo utilizando Celeste Bandera y Deep Austral.",
+      "background": "Blanco"
+    },
+
+    "dark_background": {
+      "description": "Versión del logo sobre fondo oscuro.",
+      "background": "Deep Austral"
+    }
+  },
+
+  "background_usage": {
+    "approved_backgrounds": [
+      {
+        "type": "light",
+        "description": "Fondo claro"
+      },
+      {
+        "type": "dark",
+        "description": "Fondo oscuro"
+      },
+      {
+        "type": "celeste",
+        "description": "Fondo Celeste Bandera"
+      },
+      {
+        "type": "photography",
+        "description": "Aplicación sobre fotografía"
+      }
+    ]
+  },
+
+  "protection_area": {
+    "rule": "Respetar un área de seguridad equivalente a la altura del isotipo.",
+    "unit": "X",
+    "definition": "X corresponde a la altura del isotipo.",
+    "requirement": "Mantener el espacio de protección alrededor de toda la marca."
+  },
+
+  "minimum_size": {
+    "digital": {
+      "minimum_width": "32px"
+    },
+    "print": {
+      "minimum_width": "10mm"
+    },
+    "rule": "No reducir por debajo de estos tamaños para mantener la legibilidad."
+  },
+
+  "incorrect_usage": {
+    "prohibited": [
+      {
+        "action": "deformar",
+        "description": "No deformar ni alterar las proporciones de la marca."
+      },
+      {
+        "action": "cambiar_colores",
+        "description": "No cambiar los colores establecidos del sistema."
+      },
+      {
+        "action": "rotar",
+        "description": "No rotar la marca."
+      },
+      {
+        "action": "agregar_sombras",
+        "description": "No agregar sombras ni efectos no contemplados."
+      },
+      {
+        "action": "modificar_tipografia",
+        "description": "No modificar la tipografía del logotipo."
+      },
+      {
+        "action": "separar_elementos",
+        "description": "No separar ni alterar la relación entre isotipo y logotipo."
+      }
+    ]
+  },
+
+  "applications": {
+    "examples": [
+      "Tarjetas",
+      "Papelería",
+      "Sobres",
+      "Aplicación móvil",
+      "Icono de aplicación",
+      "Gorra",
+      "Taza",
+      "Material corporativo"
+    ]
+  },
+
+  "brand_expression": {
+    "text": [
+      "AUSTRAL",
+      "IMPULSAMOS",
+      "LO QUE VIENE"
+    ],
+    "tone": [
+      "Crecimiento",
+      "Dirección",
+      "Futuro"
+    ]
+  },
+
+  "design_principles": {
+    "visual_language": [
+      "Tecnológico",
+      "Contemporáneo",
+      "Preciso",
+      "Orientado al futuro",
+      "Corporativo"
+    ],
+    "logo_priority": "El isotipo y el logotipo deben conservar siempre sus proporciones, colores y relación establecidos.",
+    "color_priority": "Celeste Bandera funciona como color de identificación principal, mientras que Deep Austral estructura fondos y textos principales.",
+    "typography_priority": "Die Grotesk funciona como sistema tipográfico principal en todos sus pesos definidos."
+  }
+}

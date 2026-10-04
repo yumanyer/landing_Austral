@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Austral — Hero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0
+    }
+  </style>
+</head>
+
+<body>
+  <section class="ah" aria-labelledby="ah-title">
+    <div class="ah__grid">
+      <div class="ah__copy">
+        <h1 id="ah-title">Build markets that don't exist yet.</h1>
+        <p class="ah__sub">Financial infrastructure for the next generation of Latin American markets.</p>
+        <div class="ah__cta">
+          <a class="ah__btn" href="#waitlist">Join the waitlist</a>
+          <a class="ah__btn ah__btn--ghost" href="#problem">Explore Austral</a>
+        </div>
+      </div>
+      <div class="ah__visual">
+        <!-- Fallback 2D (siempre se genera; se oculta si el 3D arranca) -->
+        <svg viewBox="0 0 400 400" role="img" aria-label="Scattered points resolving into an upward direction"></svg>
+        <canvas aria-hidden="true"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <style is:global>
+    .ah {
+      --ah-cel: var(--color-celeste, #75AADB);
+      --ah-deep: var(--color-deep-austral, #102A33);
+      --ah-slate: var(--color-slate, #55717A);
+      padding-block: clamp(3rem, 8vw, 6rem);
+      background: #fff;
+      color: var(--ah-deep);
+      font-family: var(--font-ui, "Die Grotesk", "Helvetica Neue", Arial, sans-serif)
+    }
+
+    .ah__grid {
+      width: min(100% - 2.5rem, 1120px);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 3rem;
+      align-items: center
+    }
+
+    .ah h1 {
+      font-family: var(--font-serif, "Lora", Georgia, serif);
+      font-weight: 500;
+      font-size: clamp(3rem, 8.5vw, 7rem);
+      line-height: 1.02;
+      letter-spacing: -.03em;
+      margin: 0 0 1.5rem
+    }
+
+    .ah__sub {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: var(--ah-slate);
+      max-width: 34rem;
+      margin: 0 0 2.5rem
+    }
+
+    .ah__cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .ah__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: .5rem 1.5rem;
+      border: 1px solid var(--ah-deep);
+      border-radius: 2px;
+      background: var(--ah-deep);
+      color: #fff;
+      font: 600 .875rem/1 inherit;
+      font-family: inherit;
+      text-decoration: none;
+      transition: background .18s, color .18s, border-color .18s
+    }
+
+    .ah__btn:hover {
+      background: var(--ah-cel);
+      border-color: var(--ah-cel);
+      color: var(--ah-deep)
+    }
+
+    .ah__btn--ghost {
+      background: none;
+      color: var(--ah-deep)
+    }
+
+    .ah__btn--ghost:hover {
+      background: #e9f0f6;
+      border-color: #e9f0f6
+    }
+
+    .ah__btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(117, 170, 219, .6)
+    }
+
+    .ah__visual {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1;
+      justify-self: end
+    }
+
+    .ah__visual svg,
+    .ah__visual canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%
+    }
+
+    .ah__visual canvas {
+      display: none
+    }
+
+    .ah.is-gl .ah__visual svg {
+      display: none
+    }
+
+    .ah.is-gl .ah__visual canvas {
+      display: block
+    }
+
+    .ah__visual circle {
+      fill: var(--ah-cel);
+      animation: ah-settle 2s cubic-bezier(.2, .7, .2, 1) both
+    }
+
+    .ah__visual circle.d {
+      fill: var(--ah-deep)
+    }
+
+    @keyframes ah-settle {
+      from {
+        transform: translate(var(--dx), var(--dy));
+        opacity: .35
+      }
+
+      to {
+        transform: none;
+        opacity: 1
+      }
+    }
+
+    @media (max-width:860px) {
+      .ah__grid {
+        grid-template-columns: 1fr
+      }
+
+      .ah__visual {
+        justify-self: center;
+        max-width: 420px
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .ah__visual circle {
+        animation: none
+      }
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      var root = document.querySelector('.ah'); if (!root) return;
+      var svg = root.querySelector('svg'), cv = root.querySelector('canvas'), NS = 'http://www.w3.org/2000/svg';
+
+      /* 1. Retícula de puntos recortada con el isotipo real (se muestrea el PNG) */
+      var STEP = 7, pts = [], im = new Image();
+      im.onload = function () { sample(); start() };
+      im.src = 'data:image/png;base64,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';
+      function sample() {
+        var W = im.naturalWidth, H = im.naturalHeight, sc = Math.min(340 / W, 340 / H), w = W * sc, h = H * sc, ox = (400 - w) / 2, oy = (400 - h) / 2;
+        var c = document.createElement('canvas'); c.width = c.height = 400;
+        var g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(im, ox, oy, w, h);
+        var d = g.getImageData(0, 0, 400, 400).data;
+        for (var y = oy + STEP / 2; y < oy + h; y += STEP)for (var x = ox + STEP / 2; x < ox + w; x += STEP) {
+          var o = ((y | 0) * 400 + (x | 0)) * 4;
+          if (d[o + 3] > 140 && !(d[o] > 235 && d[o + 1] > 235 && d[o + 2] > 235)) pts.push({ x: x, y: y, d: ((x / STEP | 0) + (y / STEP | 0)) % 9 === 0 });
+        }
+      }
+      function start() {
+        /* 2. Versión 2D (fallback) */
+        pts.forEach(function (p) {
+          var c = document.createElementNS(NS, 'circle');
+          c.setAttribute('cx', p.x); c.setAttribute('cy', p.y); c.setAttribute('r', 2.1);
+          if (p.d) c.setAttribute('class', 'd');
+          c.style.cssText = '--dx:' + ((Math.random() - .5) * 160 | 0) + 'px;--dy:' + ((Math.random() - .5) * 160 | 0) + 'px;animation-delay:' + ((370 - p.y) / 370 * 1.4).toFixed(2) + 's';
+          svg.appendChild(c);
+        });
+
+        /* 3. Versión 3D: solo con WebGL, sin reduced-motion y en dispositivos razonables */
+        if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+        if (innerWidth < 480 && (navigator.hardwareConcurrency || 4) < 4) return;
+        try { var t = document.createElement('canvas'); if (!(t.getContext('webgl') || t.getContext('experimental-webgl'))) return } catch (e) { return }
+        var s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js'; s.async = true; s.onload = init; document.head.appendChild(s);
+
+        function init() {
+          var T = THREE, r = new T.WebGLRenderer({ canvas: cv, alpha: true, antialias: true }), scene = new T.Scene(), cam = new T.PerspectiveCamera(32, 1, .1, 100);
+          cam.position.z = 15;
+          scene.add(new T.AmbientLight(0xffffff, .75));
+          var sun = new T.DirectionalLight(0xffffff, .9); sun.position.set(4, 6, 8); scene.add(sun);
+
+          /* Esferas 3D reales (InstancedMesh: una sola draw call) */
+          var SP = .17, N = pts.length * 5, tg = new Float32Array(N * 3), ps = new Float32Array(N * 3), vl = new Float32Array(N * 3), dl = new Float32Array(N);
+          var mesh = new T.InstancedMesh(new T.SphereGeometry(.056, 10, 8), new T.MeshStandardMaterial({ roughness: .4, metalness: .05 }), N);
+          var cel = new T.Color(0x75AADB), deep = new T.Color(0x102A33), n = 0;
+          pts.forEach(function (p) {
+            for (var z = -2; z <= 2; z++) {
+              var j = n * 3;
+              tg[j] = (p.x - 200) / 40; tg[j + 1] = (200 - p.y) / 40; tg[j + 2] = z * SP;
+              ps[j] = (Math.random() - .5) * 14; ps[j + 1] = (Math.random() - .5) * 14; ps[j + 2] = (Math.random() - .5) * 10;
+              dl[n] = (370 - p.y) / 370 * 1.6 + Math.random() * .4;
+              mesh.setColorAt(n, p.d ? deep : cel); n++
+            }
+          });
+          mesh.instanceColor.needsUpdate = true;
+          var grp = new T.Group(); grp.add(mesh); scene.add(grp);
+
+          function size() { r.setPixelRatio(Math.min(devicePixelRatio, 2)); r.setSize(cv.clientWidth, cv.clientHeight, false) }
+          root.classList.add('is-gl'); size(); addEventListener('resize', size);
+
+          /* Puntero: rayo -> plano z=0 -> espacio local del grupo */
+          var ray = new T.Raycaster(), plane = new T.Plane(new T.Vector3(0, 0, 1), 0), m = new T.Vector3(), dummy = new T.Object3D();
+          var nx = 0, ny = 0, on = false, vis = true, t0 = performance.now(), last = t0;
+          root.addEventListener('pointermove', function (e) { var b = cv.getBoundingClientRect(); nx = (e.clientX - b.left) / b.width * 2 - 1; ny = -((e.clientY - b.top) / b.height * 2 - 1); on = true });
+          root.addEventListener('pointerleave', function () { on = false });
+          new IntersectionObserver(function (e) { vis = e[0].isIntersecting }).observe(cv);
+
+          var R = 1.5, R2 = R * R, PUSH = .06, SPRING = .03, DAMP = .9;
+          (function frame(now) {
+            requestAnimationFrame(frame);
+            if (!vis) { last = now; return }
+            var dt = Math.min((now - last) / 16.667, 2), t = (now - t0) / 1000, damp = Math.pow(DAMP, dt); last = now;
+
+            grp.rotation.y += ((Math.sin(t * .35) * .25 + (on ? nx * .25 : 0)) - grp.rotation.y) * .05;
+            grp.rotation.x += ((on ? -ny * .15 : 0) - grp.rotation.x) * .05;
+            grp.updateMatrixWorld();
+            if (on) { ray.setFromCamera({ x: nx, y: ny }, cam); if (ray.ray.intersectPlane(plane, m)) grp.worldToLocal(m); else m.set(1e3, 1e3, 1e3) }
+            else m.set(1e3, 1e3, 1e3);
+
+            for (var i = 0; i < N; i++) {
+              var j = i * 3, a = t - dl[i], s = .3;
+              if (a >= 0) {
+                var e = Math.min(a / 1.4, 1); s = .3 + .7 * (1 - Math.pow(1 - e, 3));
+                vl[j] += (tg[j] - ps[j]) * SPRING * dt; vl[j + 1] += (tg[j + 1] - ps[j + 1]) * SPRING * dt; vl[j + 2] += (tg[j + 2] - ps[j + 2]) * SPRING * dt;
+                /* Repulsión del mouse */
+                var dx = ps[j] - m.x, dy = ps[j + 1] - m.y, dz = ps[j + 2] - m.z, d2 = dx * dx + dy * dy + dz * dz;
+                if (d2 < R2 && d2 > 1e-6) { var d = Math.sqrt(d2), f = 1 - d / R; f = f * f * PUSH * dt / d; vl[j] += dx * f; vl[j + 1] += dy * f; vl[j + 2] += dz * f }
+                vl[j] *= damp; vl[j + 1] *= damp; vl[j + 2] *= damp;
+                ps[j] += vl[j] * dt; ps[j + 1] += vl[j + 1] * dt; ps[j + 2] += vl[j + 2] * dt;
+              }
+              dummy.position.set(ps[j], ps[j + 1], ps[j + 2]); dummy.scale.setScalar(s); dummy.updateMatrix();
+              mesh.setMatrixAt(i, dummy.matrix);
+            }
+            mesh.instanceMatrix.needsUpdate = true;
+            r.render(scene, cam);
+          })(performance.now());
+        }
+      }
+    })();
+  </script>
+</body>
+
+</html>
